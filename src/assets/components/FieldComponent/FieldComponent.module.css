@@ -1,0 +1,28 @@
+.field {
+  /* position: relative; */
+  width: 100%;
+  height: 40px;
+  background: #fff9f1;
+  opacity: 0.49;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-bottom: 2rem;
+}
+::placeholder {
+  color: #494949;
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+
+input,
+select,
+textarea {
+  color: #686767;
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+
+input:focus {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}

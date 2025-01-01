@@ -1,0 +1,15 @@
+.formBackground {
+  position: absolute;
+  margin-top: auto;
+  /* Center within the remaining vertical space */
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  width: 352px;
+  height: 415px;
+  padding: 2rem;
+  left: 403px;
+  top: 163px;
+  background: #e6c99f;
+  border-radius: 9px;
+}

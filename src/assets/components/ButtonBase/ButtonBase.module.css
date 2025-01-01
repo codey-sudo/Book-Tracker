@@ -1,0 +1,30 @@
+.button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 346px;
+  height: 44px;
+  background: #0da2f3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: #016fa2; /* A darker shade of blue */
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.buttonLabel {
+  color: aliceblue;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+}
