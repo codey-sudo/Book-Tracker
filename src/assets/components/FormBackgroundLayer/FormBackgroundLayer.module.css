@@ -10,6 +10,10 @@
   padding: 2rem;
   left: 403px;
   top: 163px;
+
+  background-image: linear-gradient(to right, #dffdff, #83a4d4);
+
   background: #e6c99f;
   border-radius: 9px;
+  opacity: 0.89;
 }
