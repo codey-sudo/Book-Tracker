@@ -10,23 +10,23 @@ function AddBookForm() {
     Category: "",
   });
 
-  const bookFormButton = {
-    fontSize: "1rem",
-    marginTop: "2rem",
-    zIndex: "100",
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "44px",
-    background: "#0da2f3",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    borderRadius: "11px",
-    color: "aliceblue",
-    border: "none",
-    padding: "10px 100px",
-    whiteSpace: "nowrap",
-  };
+  // const bookFormButton = {
+  //   fontSize: "1rem",
+  //   marginTop: "2rem",
+  //   zIndex: "100",
+  //   position: "relative",
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   height: "44px",
+  //   background: "#0da2f3",
+  //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  //   borderRadius: "11px",
+  //   color: "aliceblue",
+  //   border: "none",
+  //   padding: "10px 100px",
+  //   whiteSpace: "nowrap",
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,7 +65,7 @@ function AddBookForm() {
         />
       </form>
 
-      <button style={bookFormButton}>Add to library</button>
+      <button className={Styles.bookFormButton}>Add to library</button>
     </FormBackgroundLayer>
   );
 }

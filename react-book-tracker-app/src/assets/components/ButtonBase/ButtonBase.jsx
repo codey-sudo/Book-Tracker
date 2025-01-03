@@ -4,7 +4,7 @@ import Styles from "./ButtonBase.module.css";
 function ButtonBase({ children }) {
   return (
     <div className={Styles.button}>
-      <div className={Styles.buttonLabel}>{children}</div>
+      <span className={Styles.buttonLabel}>{children}</span>
     </div>
   );
 }

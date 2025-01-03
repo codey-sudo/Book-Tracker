@@ -14,3 +14,7 @@
   max-width: 100%; /* Optional: Limits maximum width */
   box-sizing: border-box; /* Include padding in the element's dimensions */
 }
+
+.background:hover {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
