@@ -35,6 +35,9 @@ function AddBookForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form Data:", formData);
+    onAddBook({ ...formData, id: Date.now() }); //Adding unique ID
+    setFormData({ Title: "", Author: "", Category: "" }); // Clear the form
     console.log("Form submitted:", formData);
   };
 
@@ -65,7 +68,7 @@ function AddBookForm() {
         />
       </form>
 
-      <button className={Styles.bookFormButton}>Add to library</button>
+      <button className={Styles.bookFormButton}>Add to Library</button>
     </FormBackgroundLayer>
   );
 }
