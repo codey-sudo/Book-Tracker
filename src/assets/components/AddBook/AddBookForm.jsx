@@ -3,46 +3,37 @@ import FormBackgroundLayer from "../FormBackgroundLayer/FormBackgroundLayer";
 import FieldComponent from "../FieldComponent/FieldComponent";
 import Styles from "./AddBookForm.module.css";
 
-function AddBookForm() {
+function AddBookForm({ onAddBook, onClose }) {
   const [formData, setFormData] = useState({
     Title: "",
     Author: "",
     Category: "",
   });
 
-  // const bookFormButton = {
-  //   fontSize: "1rem",
-  //   marginTop: "2rem",
-  //   zIndex: "100",
-  //   position: "relative",
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   height: "44px",
-  //   background: "#0da2f3",
-  //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-  //   borderRadius: "11px",
-  //   color: "aliceblue",
-  //   border: "none",
-  //   padding: "10px 100px",
-  //   whiteSpace: "nowrap",
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    onAddBook({ ...formData, id: Date.now() }); //Adding unique ID
-    setFormData({ Title: "", Author: "", Category: "" }); // Clear the form
-    console.log("Form submitted:", formData);
+    if (!formData.Title || !formData.Author || !formData.Category) {
+      console.error("All fields are required.");
+      return;
+    }
+    onAddBook({ ...formData, id: Date.now() }); // Pass form data to parent
+    setFormData({ Title: "", Author: "", Category: "" }); // Reset form
   };
 
   return (
     <FormBackgroundLayer>
+      <button
+        className={Styles.closeFormButton}
+        onClick={onClose}
+        aria-label="Close form"
+      >
+        ×
+      </button>
       <form onSubmit={handleSubmit} className={Styles.form}>
         <FieldComponent
           type="text"
@@ -58,7 +49,6 @@ function AddBookForm() {
           value={formData.Author}
           onChange={handleChange}
         />
-
         <FieldComponent
           type="text"
           name="Category"
@@ -66,9 +56,10 @@ function AddBookForm() {
           value={formData.Category}
           onChange={handleChange}
         />
+        <button type="submit" className={Styles.bookFormButton}>
+          Add to Library
+        </button>
       </form>
-
-      <button className={Styles.bookFormButton}>Add to Library</button>
     </FormBackgroundLayer>
   );
 }

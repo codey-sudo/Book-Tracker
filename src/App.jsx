@@ -1,41 +1,46 @@
-import { useState } from "react";
-import { Container } from "./assets/components";
-import ButtonBase from "./assets/components/ButtonBase/ButtonBase";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { BooksProvider } from "./context/BooksContext"; // Import BooksProvider
+import HomePage from "./pages/HomePage/HomePage";
+import LibraryPage from "./pages/LibraryPage/LibraryPage";
+import Container from "./assets/components/Container/Container";
 import Header from "./assets/components/Header/Header";
-import AddBookForm from "./assets/components/AddBook/AddBookForm";
 
 function App() {
-  const [showForm, setShowForm] = useState(false);
-  const [books, setBooks] = useState([]); // State to track books
-  console.log("Show Form:", showForm); // Logs the state on every render
-
-  const handleButtonClick = () => {
-    setShowForm(true);
-  };
-
-  const handleAddBook = (newBook) => {
-    console.log("Adding book:", newBook);
-    setBooks([...books, newBook]);
-  };
-
   return (
-    <Container>
-      {showForm ? (
-        <>
-          <Header />
-          <AddBookForm onAddBook={handleAddBook} />
-          <ul>
-            {books.map((book) => (
-              <li key={book.id}>
-                {book.Title} by {book.Author} ({book.Category})
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <ButtonBase onClick={handleButtonClick}>Add a New Book</ButtonBase>
-      )}
-    </Container>
+    <BooksProvider>
+      {/* Wrap your app with BooksProvider */}
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Container>
+                <Header />
+                <HomePage />
+              </Container>
+            }
+          />
+          <Route
+            path="/library"
+            element={
+              <Container>
+                <Header />
+                <LibraryPage />
+              </Container>
+            }
+          />
+          <Route
+            path="/"
+            element={<Navigate to="/home" />} // Redirect to homepage on startup
+          />
+        </Routes>
+      </Router>
+    </BooksProvider>
   );
 }
 
