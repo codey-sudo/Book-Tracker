@@ -21,8 +21,10 @@ function AddBookForm({ onAddBook, onClose }) {
       console.error("All fields are required.");
       return;
     }
+
     onAddBook({ ...formData, id: Date.now() }); // Pass form data to parent
     setFormData({ Title: "", Author: "", Category: "" }); // Reset form
+    onClose(); // Close the form after submission
   };
 
   return (

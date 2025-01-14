@@ -1,30 +1,23 @@
 // import { useState } from "react";
-// import Container from "../../assets/components/Container/Container";
 // import ButtonBase from "../../assets/components/ButtonBase/ButtonBase";
-// import Header from "../../assets/components/Header/Header";
 // import AddBookForm from "../../assets/components/AddBook/AddBookForm";
 // import LibraryPage from "../LibraryPage/LibraryPage";
+// import { useBooks } from "../../context/BooksContext"; // Import the useBooks hook
 
 // function HomePage() {
-//   const [showForm, setShowForm] = useState(false);
-//   const [books, setBooks] = useState([]); // State to track books
-
-//   const handleAddBook = (newBook) => {
-//     setBooks((prevBooks) => [...prevBooks, newBook]);
-//     setShowForm(false); // Close form after adding a book
-//   };
+//   const [showForm, setShowForm] = useState(false); // State to track form visibility
+//   const { books, addBook } = useBooks(); // Access books and addBook function from the context
 
 //   const handleCloseForm = () => {
 //     setShowForm(false); // Close form without adding a book
 //   };
 
 //   return (
-//     <Container>
-//       <Header />
-//       {/* Show Add Book Form or Library based on state */}
+//     <>
+//       {/* Show Add Book Form or Library based on books state */}
 //       {books.length > 0 ? (
 //         // If books are present, show the library page
-//         <LibraryPage books={books} onReturnHome={() => {}} />
+//         <LibraryPage />
 //       ) : (
 //         <>
 //           {/* Show Add Book button if no books are present */}
@@ -32,55 +25,11 @@
 //             Add a New Book
 //           </ButtonBase>
 //           {showForm && (
-//             <AddBookForm onAddBook={handleAddBook} onClose={handleCloseForm} />
+//             <AddBookForm onAddBook={addBook} onClose={handleCloseForm} />
 //           )}
 //         </>
 //       )}
-//     </Container>
-//   );
-// }
-
-// export default HomePage;
-
-// import { useState } from "react";
-// import Container from "../../assets/components/Container/Container";
-// import ButtonBase from "../../assets/components/ButtonBase/ButtonBase";
-// import Header from "../../assets/components/Header/Header";
-// import AddBookForm from "../../assets/components/AddBook/AddBookForm";
-// import LibraryPage from "../LibraryPage/LibraryPage";
-
-// function HomePage() {
-//   const [showForm, setShowForm] = useState(false); // State for form visibility
-//   const [books, setBooks] = useState([]); // State to track books
-
-//   const handleAddBook = (newBook) => {
-//     setBooks((prevBooks) => [...prevBooks, newBook]); // Add new book to the list
-//     setShowForm(false); // Hide form after adding a book
-//   };
-
-//   const handleCloseForm = () => {
-//     setShowForm(false); // Close form without adding a book
-//   };
-
-//   return (
-//     <Container>
-//       <Header />
-//       {/* Show the library or the Add Book Form depending on the books */}
-//       {books.length > 0 ? (
-//         // If there are books, show the library page
-//         <LibraryPage books={books} onReturnHome={() => {}} />
-//       ) : (
-//         <>
-//           {/* Show Add Book button and form if no books are present */}
-//           <ButtonBase onClick={() => setShowForm(true)}>
-//             Add a New Book
-//           </ButtonBase>
-//           {showForm && (
-//             <AddBookForm onAddBook={handleAddBook} onClose={handleCloseForm} />
-//           )}
-//         </>
-//       )}
-//     </Container>
+//     </>
 //   );
 // }
 
@@ -94,26 +43,56 @@ import { useBooks } from "../../context/BooksContext"; // Import the useBooks ho
 
 function HomePage() {
   const [showForm, setShowForm] = useState(false); // State to track form visibility
+  const [showLibrary, setShowLibrary] = useState(false); // State to track library visibility
   const { books, addBook } = useBooks(); // Access books and addBook function from the context
 
+  const handleAddBook = (newBook) => {
+    addBook(newBook); // Add the new book to the context
+    setShowForm(false); // Close the form after adding
+  };
+
+  const handleShowLibrary = () => {
+    setShowLibrary(true); // Show the library page
+  };
+
   const handleCloseForm = () => {
-    setShowForm(false); // Close form without adding a book
+    setShowForm(false); // Close the form without adding
   };
 
   return (
     <>
-      {/* Show Add Book Form or Library based on books state */}
-      {books.length > 0 ? (
-        // If books are present, show the library page
-        <LibraryPage />
-      ) : (
+      {/* Conditionally show the homepage buttons when not in the library */}
+      {!showLibrary && (
         <>
-          {/* Show Add Book button if no books are present */}
+          {/* Always show the "Add a New Book" button */}
           <ButtonBase onClick={() => setShowForm(true)}>
             Add a New Book
           </ButtonBase>
+
+          {/* Conditionally render the "View Library" button if there are books */}
+          {books.length > 0 && (
+            <div style={{ marginTop: "10px" }}>
+              <ButtonBase onClick={handleShowLibrary}>View Library</ButtonBase>
+              {/* Add the "Add a New Book" button again here if needed */}
+              {/* <ButtonBase
+                onClick={() => setShowForm(true)}
+                style={{ marginLeft: "10px" }}
+              >
+                Add a New Book
+              </ButtonBase> */}
+            </div>
+          )}
+        </>
+      )}
+
+      {showLibrary ? (
+        // Render the LibraryPage when showLibrary is true
+        <LibraryPage />
+      ) : (
+        // Home Page content: Show Add Book Form if needed
+        <>
           {showForm && (
-            <AddBookForm onAddBook={addBook} onClose={handleCloseForm} />
+            <AddBookForm onAddBook={handleAddBook} onClose={handleCloseForm} />
           )}
         </>
       )}
