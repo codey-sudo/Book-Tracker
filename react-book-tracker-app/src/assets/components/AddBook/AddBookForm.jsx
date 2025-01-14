@@ -21,10 +21,15 @@ function AddBookForm({ onAddBook, onClose }) {
       console.error("All fields are required.");
       return;
     }
+<<<<<<< HEAD:react-book-tracker-app/src/assets/components/AddBook/AddBookForm.jsx
 
     onAddBook({ ...formData, id: Date.now() }); // Pass form data to parent
     setFormData({ Title: "", Author: "", Category: "" }); // Reset form
     onClose(); // Close the form after submission
+=======
+    onAddBook({ ...formData, id: Date.now() }); // Pass form data to parent
+    setFormData({ Title: "", Author: "", Category: "" }); // Reset form
+>>>>>>> 7dbdffeecc862dbaec74d170d711ee4155789c13:src/assets/components/AddBook/AddBookForm.jsx
   };
 
   return (
